@@ -3,5 +3,5 @@
 [ext_resource type="PackedScene" path="res://main.tscn" id="1"]
 
 [node name="Main" instance=ExtResource("1")]
-zones_dir = "res://zones_belleville"
-other_scene = "res://main.tscn"
+ZonesDir = "res://zones_belleville"
+OtherScene = "res://main.tscn"

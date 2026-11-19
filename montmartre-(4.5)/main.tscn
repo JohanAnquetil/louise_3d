@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/Main.cs" id="1"]
+[ext_resource type="Script" path="res://scripts/Player.cs" id="2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
+sky_top_color = Color(0.2, 0.3, 0.55, 1)
+sky_horizon_color = Color(0.98, 0.66, 0.42, 1)
+sky_curve = 0.12
+ground_bottom_color = Color(0.32, 0.25, 0.27, 1)
+ground_horizon_color = Color(0.98, 0.66, 0.42, 1)
+ground_curve = 0.05
+sun_angle_max = 35.0
+sun_curve = 0.12
+
+[sub_resource type="Sky" id="sky"]
+sky_material = SubResource("sky_mat")
+
+[sub_resource type="Environment" id="env"]
+background_mode = 2
+sky = SubResource("sky")
+ambient_light_source = 3
+ambient_light_color = Color(0.62, 0.6, 0.78, 1)
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 0.65
+tonemap_mode = 2
+tonemap_white = 2.5
+fog_enabled = true
+fog_light_color = Color(0.96, 0.7, 0.52, 1)
+fog_light_energy = 0.55
+fog_density = 0.0006
+fog_aerial_perspective = 0.4
+fog_sky_affect = 0.2
+glow_enabled = true
+glow_intensity = 0.3
+glow_bloom = 0.05
+glow_hdr_threshold = 1.1
+
+[sub_resource type="CapsuleShape3D" id="capsule"]
+radius = 0.35
+height = 1.75
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1")
+OtherScene = "res://belleville.tscn"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+light_color = Color(1, 0.68, 0.44, 1)
+light_energy = 1.0
+shadow_enabled = true
+shadow_blur = 1.5
+directional_shadow_max_distance = 260.0
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Player" type="CharacterBody3D" parent="."]
+floor_max_angle = 0.9
+floor_snap_length = 0.5
+script = ExtResource("2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("capsule")
+
+[node name="Head" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+current = true
+fov = 75.0
+near = 0.1
+far = 9000.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Aide" type="Label" parent="HUD"]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 900.0
+offset_bottom = 40.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+text = "Clic : capturer la souris  ·  ZQSD / WASD / flèches : marcher  ·  Maj : courir  ·  Espace : sauter  ·  Échap : libérer  ·  Tab : changer de quartier  ·  C : décor de la Commune"
