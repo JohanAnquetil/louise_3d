@@ -1,0 +1,9 @@
+# Fichiers Blender et sauvegardes automatiques
+*.blend
+*.blend[0-9]*
+
+# Cache généré par Godot
+.godot/
+
+# Métadonnées macOS
+.DS_Store
