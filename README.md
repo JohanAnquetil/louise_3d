@@ -43,7 +43,7 @@ Godot les construit une seule fois et les partage entre toutes les zones.
 ## Louise Michel
 `blender/make_louise.py` fabrique `godot/personnages/louise_michel.glb` : personnage low-poly statique (environ 1 000 triangles,
 sans squelette ni animation), robe noire, écharpe rouge, livre et drapeau rouge (objet `drapeau` séparé, supprimable).
-Elle est placée devant le joueur place du Tertre par `_spawn_louise()` dans `godot/scripts/main.gd`.
+Elle est placée devant le joueur place du Tertre par `SpawnLouise()` dans `godot/scripts/Main.cs`.
 
 ## Textures photo (facultatif)
 Les textures de `data/textures/` (Poly Haven, CC0) remplacent les sols dessinés : pavés, dalles, herbe, trottoirs,
@@ -69,3 +69,10 @@ Option `--commune` du script : drapeaux rouges aux façades, affiches placardée
 `commune` : dans Godot, la touche C les affiche ou les masque (propriété `show_commune` du nœud `Main`).
 Les affiches et la banderole viennent de `data/textures/affiches.png`, modifiable dans un éditeur d'images.
 Les deux quartiers livrés ont été générés avec `--commune`.
+
+## Code du jeu (C#)
+Le jeu est écrit en C# (Godot 4.5 version .NET, SDK .NET 8 ou plus récent) :
+- `godot/scripts/Main.cs` : chargement d'un quartier (zones, matériaux, réverbères, Louise, décor de la Commune, touches Tab et C, mode `--capture`).
+- `godot/scripts/Player.cs` : joueur à la première personne.
+- `godot/scripts/WorldInfo.cs` : structure du fichier `world.json` écrit par le générateur.
+Godot compile tout seul au lancement (F5). Les scripts Python de `blender/` restent en Python.
